@@ -1,0 +1,31 @@
+def commonCharacterCount(s1, s2):
+   '''
+   Below will find the common occurance of character in strings
+   '''
+
+   char_set1 = [0]*26
+   char_set2 = [0] * 26
+   char_set3 = [0] * 26
+   for ch1 in s1:
+       index = ord(ch1)-ord('a')
+       char_set1[index] +=1
+   for ch2 in s2:
+       index = ord(ch2) - ord('a')
+       char_set2[index] += 1
+
+   print char_set1
+   print char_set2
+   count = 0
+   for i,j in zip(char_set1,char_set2):
+       char_set3[count] = min(i,j)
+       count +=1
+
+
+
+   return sum(char_set3)
+
+
+s1 = "aabcc"
+s2 = "adcaa"
+
+print commonCharacterCount(s1, s2)

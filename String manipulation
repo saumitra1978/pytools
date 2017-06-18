@@ -1,0 +1,25 @@
+    
+def reverseParentheses(s):
+    '''
+    Replace open/close brase , reverse the text within that
+    
+    '''
+    #create a stack to track the open brase
+    left_brace = []
+    ptr = 0
+    length = len(s)
+    while(ptr<length):
+       if re.search('\(',s[ptr]):
+           left_brace.append(ptr)
+           ptr +=1
+       elif re.search('\)',s[ptr]):
+           #pop the index of the last left curly brase index
+           left_index = left_brace.pop()
+           right_index =  ptr
+           tmp = s[left_index+1:ptr][::-1]
+           s = s[:left_index] + tmp + s[ptr+1::]
+           length = length -2
+       else:
+           pass
+           ptr +=1
+    return s

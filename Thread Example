@@ -1,0 +1,44 @@
+from Queue import Queue
+import threading
+import time
+class A(threading.Thread):
+
+    def __init__(self,*args,**kwargs):
+        self.tName = args[0]
+        self.q = args[1]
+        threading.Thread.__init__(self,name=self.tName)
+
+    def run(self,*args):
+        q=self.q
+        if self.tName == 'A':
+           q.put(38)
+        if self.tName == 'B':
+           q.put("Sam")
+        print "Inside the Thread with name %s" %(self.tName)
+        time.sleep(5)
+
+class tClass(A):
+
+    def __init__(self):
+         pass
+
+    def runThread(self):
+        q = Queue()
+        qt = [(i,q) for i in range(2)]
+        tList = []
+        _t = A('A',qt[0][1])
+        _t.start()
+        _t = A('B',qt[1][1])
+        _t.start()
+        tList.append(_t)
+
+        for i in tList:
+            i.join()
+        for i in range(2):
+           print qt[i][1].get()
+
+
+if __name__ =='__main__':
+    obj = tClass()
+    obj.runThread()
+                                    

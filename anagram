@@ -1,0 +1,45 @@
+'''
+Cheacks Str1 is an anagram of str2
+Takes 0(n) 
+
+'''
+
+
+
+
+
+def anagramF(str1,str2):
+
+    str1 = str1.lower()
+    str2 = str2.lower()
+
+    tmp1 = [0]*26
+    tmp2 = [0]*26
+
+    for ch in str1:
+        index =  ord(ch) - ord('a')
+        tmp1[index] +=1
+
+
+    for ch in str2:
+        index =  ord(ch) - ord('a')
+        tmp2[index] +=1
+
+    print tmp1
+    print tmp2
+    #Now if str1 is analgram of str2
+    #all charcters of str1 should be there in str2
+    match = True
+    for ch in set(str1):
+        index = ord(ch) - ord('a')
+        if not  (tmp2[index] - tmp1[index]) >= 0:
+             match = False
+             break
+
+    return match
+
+
+str1 = "mitrax"
+str2 = "saumitra"
+
+print anagramF(str1,str2)

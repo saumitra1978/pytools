@@ -1,0 +1,35 @@
+
+class Solution(object):
+    def removeNthFromEnd(self, head, n):
+        """
+        :type head: ListNode
+        :type n: int
+        :rtype: ListNode
+        """
+        e_stack =[]
+        curr_node = head
+        while(curr_node):
+            e_stack.append(curr_node)
+            curr_node=curr_node.next
+        cnt = 1   
+        found = False
+        prev_node = curr_node = None
+        if len(e_stack) > 0:
+            curr_node = e_stack.pop()
+            if n==cnt:
+                found = True
+                #pop the next element in stack if exist
+                if len(e_stack) > 0:
+                    tmp1 = e_stack.pop()
+                    tmp1.next = prev_node
+                else:
+                    head = None
+                    return head
+            else:    
+                prev_node = curr_node    
+                cnt +=1
+        if found:        
+            return head  
+        else:
+            head = None
+            return None

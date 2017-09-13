@@ -1,0 +1,49 @@
+class Solution(object):
+    def BST(self, nums , target):
+
+        if len(nums) > 1:
+            mid = len(nums)/2
+
+            if nums[mid] == target:
+               return mid
+
+            else:
+              if nums[mid] > target:
+                #left
+                return self.BST(nums[:mid],target)
+              else:
+                #right
+                return self.BST(nums[mid:],target)
+
+        else:
+            if nums[0] != target:
+                print "Element {0} not found".format(target)
+                return -1
+            else:
+                return 0
+
+    def searchRange(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        id=0
+        if len(nums) >0:
+         idx = self.BST(nums,target)
+
+         if idx == -1:
+            return [-1,-1]
+
+         new_nums = nums[idx+1:]
+         key = nums[idx]
+         
+         for id,n in enumerate(new_nums):
+            if n != key:
+                break
+         #pdb.set_trace()
+         return [idx,idx+id]
+        
+        return  [-1,-1]
+
+        

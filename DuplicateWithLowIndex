@@ -1,0 +1,20 @@
+def firstDuplicate(ll):
+
+    if len(ll) ==1:
+        return -1
+    
+    n_dict = {}
+    
+    for idx,num in enumerate(ll):
+        if not num in n_dict.keys():
+           #First so create 
+           n_dict[num] = len(ll)
+        else:
+            n_dict[num] = idx
+    tmp = min(n_dict.items(),key = lambda x:x[1])
+    
+    if tmp[1] == len(ll):
+        return -1
+    else:
+              
+         return tmp[0]

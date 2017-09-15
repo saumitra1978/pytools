@@ -1,0 +1,15 @@
+
+f_d ={}
+
+def fib(n):
+
+    if n == 0 or n == 1:
+        return 1
+    else:
+       if n not in f_d:
+          f_d[n] = fib(n-1) + fib(n-2)
+
+    return f_d[n]
+
+
+print fib(5)

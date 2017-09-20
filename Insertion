@@ -1,0 +1,20 @@
+def insertionSort(m,ar):
+    if len(ar) == 1:
+        return ar
+    tmp =[]
+    tmp.append(ar[0])
+    for j in range(1,m):
+        i = j -1
+        while tmp[i] >  ar[j] and i >= 0:
+             i -=1
+        tmp.insert(i+1,ar[j])
+    return tmp
+       
+                
+                 
+        
+    
+
+m = int(input())
+ar = [int(i) for i in raw_input().strip().split()]
+print ','.join(map(str,insertionSort(m,ar)))

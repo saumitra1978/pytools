@@ -1,0 +1,58 @@
+import sys,pdb
+
+transactions = [
+{"payee": "BoA", "amount": 132, "payer": "Chase"},
+{"payee": "BoA", "amount": 827, "payer": "Chase"},
+{"payee": "Well Fargo", "amount": 751, "payer": "BoA"},
+{"payee": "BoA", "amount": 585, "payer": "Chase"},
+{"payee": "Chase", "amount": 877, "payer": "Well Fargo"},
+{"payee": "Well Fargo", "amount": 157, "payer": "Chase"},
+{"payee": "Well Fargo", "amount": 904, "payer": "Chase"},
+{"payee": "Chase", "amount": 976, "payer": "BoA"},
+{"payee": "Chase", "amount": 548, "payer": "Well Fargo"},
+{"payee": "BoA", "amount": 872, "payer": "Well Fargo"}]
+
+class findTransaction(object):
+
+   def __init__(self,BankA,BankB):
+          self.BankA = BankA
+          self.BankB = BankB
+
+   def buildList(self,transactions):
+     try:
+
+        if len(transactions) < 1:
+           return 0
+
+        else:
+           tmp = [0] * len(transactions)
+           for index in range(len(transactions)):
+              payee = transactions[index]['payee']
+              amount = transactions[index]['amount']
+              payer = transactions[index]['payer']
+              tmp[index] = payee,amount,payer
+        return tmp
+     except:
+       print "{0]".format(sys.exc_info())
+
+   def getTransactionAmount(self,transactions):
+
+      try:
+        tmp = self.buildList(transactions)
+
+        amount = 0
+
+        for index,value in enumerate(tmp):
+
+            if value[0] == self.BankA and value[2] == self.BankB:
+                 amount += int(value[1])
+
+        return amount
+
+      except:
+        print "{0}".format(sys.exc_info())
+
+
+obj = findTransaction('BoA','Chase')
+
+print obj.getTransactionAmount(transactions)

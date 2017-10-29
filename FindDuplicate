@@ -1,0 +1,11 @@
+sum = 0
+for i in x:
+    if sum & (1<<i) > 1:
+        #Means duplicate exist
+        #Then flip the bit to 0
+        sum = sum ^ (1<<i)
+    else:
+        #Set the bit when it is seen for first time
+        sum = sum | ( 1<< i)
+
+print bin(sum)[::-1].index('1')

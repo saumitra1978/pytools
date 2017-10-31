@@ -1,0 +1,41 @@
+str1 = "sdesimar"
+str2 = "desi"
+
+
+def getStrDict(str):
+  d = {}
+  for ch in str:
+    if ch not in d:
+        d[ch] = 1
+    else:
+        d[ch] +=1
+  return d
+
+
+def compare2dict(d1,d2):
+
+    if not set(d1.iteritems()) - set(d2.iteritems()):
+        return True
+    else:
+        return False
+
+
+def isplandram(str1,str2):
+
+    d1 = getStrDict(str2)
+    j = 0
+    k = len(str2)
+
+    while(j < len(str1)):
+        #pdb.set_trace()
+        new_str = str1[j:j+k]
+        d2 = getStrDict(new_str)
+        if compare2dict(d2,d1):
+            return True
+        else:
+           j = j+k
+if isplandram(str1,str2):
+    print "There is"
+
+else:
+    print "Not"

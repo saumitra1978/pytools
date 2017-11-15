@@ -1,0 +1,51 @@
+'''
+Shortest path computation using BFS
+'''
+
+
+import pdb
+from pprint import pprint
+graph = {\
+          'A':{'B':12,'C':23},\
+          'B':{'E':15},\
+          'C':{'D':15},\
+           'D':{},\
+           'E':{}
+           }
+
+
+def BFS(graph,start_node,end_node):
+
+    s_q = []
+    v_n = []
+    distance_to_root = {}
+    distance_to_root['A'] = 0
+    s_q.append(start_node)
+    #Check Queue - node remaining to visit
+    while len(s_q) > 0:
+        #pdb.set_trace()
+        c_n = s_q.pop(0)
+        print "Visiting node {0}".format(c_n)
+        #Get c_n neighbor
+        neighbors=[]
+        if len(graph[c_n]) > 0:
+            #It has neighbors
+            neighbors.extend(graph[c_n].keys())
+
+
+        if c_n not in v_n:
+             v_n.append(c_n)
+             for ch in neighbors:
+                 if ch not in distance_to_root:
+                     #Means child distance is not computed
+                     distance_to_root[ch] = distance_to_root[c_n] + graph[c_n][ch]
+                 else:
+                     #Means child distance was computed
+                     #Take the minimum
+                     distance_to_root[ch] = min(distance_to_root[c_n] + graph[c_n][ch],distance_to_root[ch])
+             for ch in neighbors:
+                 s_q.append(ch)
+
+    pprint(distance_to_root)
+
+BFS(graph,'A','E')

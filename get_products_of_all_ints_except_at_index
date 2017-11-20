@@ -1,0 +1,18 @@
+'''
+You have a list of integers, and for each index you want to find the product of every integer except the integer at that index.
+Assumes list do not have an element as 0
+Below is a small O(n) solution 
+'''
+
+
+
+A = [ 1,3,4,5]
+sum = 1
+for v in A:
+    sum *= v
+tmp =[]
+
+for v in A:
+    tmp.append(sum/v)
+
+print tmp

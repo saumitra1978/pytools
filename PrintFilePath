@@ -1,0 +1,47 @@
+import pdb
+from pprint import pprint
+
+input = {"root":{"F1":{"F3":"F4"},\
+                 "F5":{"F6":["F7","F8"]}}}
+
+
+def build_path(input):
+    '''
+    Function will take a dictionary as an input
+    Check if it is dict before proceeding
+    :param input: 
+    :return: 
+    '''
+    if isinstance(input,dict):
+        _build_path(input)
+    else:
+        print "Need dictionary as an input"
+
+def _build_path(input,stk=[]):
+      '''
+      This is a recursive function to build the file path
+      Uses stack to track the path
+      :param input: 
+      :param stk: 
+      :return: 
+      '''
+
+      for k,v in input.items():
+        if k == "root":
+            stk = []
+        stk.append(k)
+        if isinstance(v,dict):
+            _build_path(v,stk)
+        else:
+            if isinstance(v,list):
+                for each_value in v:
+                    print '/' + '/'.join(stk) + '/' + each_value
+            else:
+                print '/' + '/'.join(stk) + "/" + v
+          
+            stk.pop()
+
+if __name__ == '__main__':
+
+
+   build_path(input)

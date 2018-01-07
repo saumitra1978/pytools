@@ -1,0 +1,32 @@
+
+
+
+def reverseParentheses(s):
+    new_string = ''
+    f_st = []
+    new_str = s
+    cnt = 0
+    s_cnt = 0
+    upper = 0
+    remove = False
+    if len(s) >= 5 and len(s) <= 55:
+
+        for idx, val in enumerate(s):
+            if re.search('\(', val):
+                f_st.append(idx)
+                if remove:
+                    s_cnt = 2
+                    remove = False
+            elif re.search('\)', val):
+                lower = f_st.pop() - s_cnt
+                if len(f_st) == 0:
+                    s_cnt = 2
+                else:
+                    s_cnt = 0
+                upper = idx - 2*cnt
+                #pdb.set_trace()
+                new_str = new_str[:lower] + new_str[lower+1:upper][::-1] + new_str[upper+1:]
+                cnt +=1
+                remove = True
+
+    return new_str

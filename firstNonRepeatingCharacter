@@ -1,0 +1,27 @@
+class ChDict(object):
+    def __init__(self,f,c,pos):
+        self.f = f
+        self.c = c
+        self.p = pos
+
+
+def firstNotRepeatingCharacter(s):
+ if len(s) >=1:
+  tmp =[]
+  tmp1=[]
+  for i in range(26):
+      tmp.append(ChDict(0,'\0',-1))
+
+  for i,c in enumerate(s):
+      pos = ord(c) - ord('a')
+      tmp[pos].f +=1
+      tmp[pos].c = c
+      tmp[pos].p = i
+
+  for ob in tmp:
+      if ob.f == 1:
+          tmp1.append((ob.c,ob.p))
+  if len(tmp1) == 0:
+      return "_"
+  else:
+    return min(tmp1, key = lambda x:x[1])[0]

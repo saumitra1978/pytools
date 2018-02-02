@@ -1,0 +1,45 @@
+
+
+
+import pdb
+cake_tuples = [(7, 160), (3, 90), (2, 15)]
+
+
+
+
+def max_value(p_index,index,cake_tuples,m_capacity,u_capacity,c_m):
+    #pdb.set_trace()
+    if  index < len(cake_tuples) and (m_capacity - u_capacity) >= cake_tuples[index][0] :
+        #pdb.set_trace()
+        c_tuple = cake_tuples[index]
+        k = c_tuple[0]
+        diff = m_capacity - u_capacity
+        n_key = diff // k
+        amount = c_tuple[1] * n_key
+        c_m[p_index].append(amount)
+        remaining = diff % k
+        if remaining > 0 :
+           u_capacity =  n_key * k + u_capacity
+           print u_capacity, k
+           return max_value(index,index + 1,cake_tuples,m_capacity,u_capacity,c_m)
+    elif index < len(cake_tuples):
+        return max_value(index, index + 1, cake_tuples, m_capacity, u_capacity, c_m)
+    else:
+        return 0
+
+
+
+def cake_puzzle(cake_tuples,max_capacity):
+    c_m = {}
+    max = 0
+    for index in range(len(cake_tuples)):
+       c_m[index] = []
+       max_value(index ,index, cake_tuples, max_capacity, 0 , c_m)
+       tmp = sum(c_m[index])
+       if tmp > max:
+           max = tmp
+
+    return max
+
+
+print cake_puzzle(cake_tuples,20)

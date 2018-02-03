@@ -1,0 +1,42 @@
+# Definition for singly-linked list:
+# class ListNode(object):
+#   def __init__(self, x):
+#     self.value = x
+#     self.next = None
+#
+
+def length_list(l):
+    '''
+    Get the element list
+    '''
+    cnt =0
+    while(l):
+        cnt +=1
+        l = l.next
+    return cnt    
+
+def isListPalindrome(l):
+         '''
+         Uses stack to track
+         '''
+         isEven = False
+         l_stack = []
+         num_element = length_list(l)
+         if (num_element) % 2 == 0:
+             isEven = True
+         mid = (num_element //2)
+         curr = l
+         cnt =0
+         while(curr):
+             if cnt < mid:
+                 l_stack.append(curr.value)
+             elif not isEven and cnt == (mid):
+                 pass
+             else:
+                 e = l_stack.pop()
+                 n = curr.value
+                 if n != e:
+                     return False
+             curr = curr.next
+             cnt +=1
+         return True

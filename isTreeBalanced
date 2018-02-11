@@ -1,0 +1,50 @@
+#
+# Definition for binary tree:
+# class Tree(object):
+#   def __init__(self, x):
+#     self.value = x
+#     self.left = None
+#     self.right = None
+from Queue import Queue
+def isBalanced(node_m):
+    if len(node_m) >0:
+        for k,v in node_m.iteritems():
+            n = pow(2,k)
+            if v !=0 and v != n:
+                return False
+    return True
+
+def isTreeSymmetric(t):
+        q=Queue()
+        if t:
+            level = 0
+            explored=[]
+            nodes_at_level = {}
+            nodes_at_level[level] = 1
+            _level = 0
+            q.put((t,_level))
+
+            while not q.empty():
+                tmp = q.get()
+                p_level = tmp[1]
+                c_n = tmp[0]
+                neighbor = []
+                if c_n.left:
+                    neighbor.append(c_n.left)
+                if c_n.right:
+                    neighbor.append(c_n.right)
+
+                if c_n not in explored:
+                    c_level = p_level +1
+                    nodes_at_level.setdefault(c_level,0)
+                    explored.append(c_n)
+                    for n in neighbor:
+                        nodes_at_level[c_level] +=1
+                        q.put((n,c_level))
+        else:
+            return True
+
+        if isBalanced(nodes_at_level):
+            return True
+        else:
+           return False

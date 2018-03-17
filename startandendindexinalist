@@ -1,0 +1,51 @@
+'''
+Given an array of integers sorted in ascending order, find the starting and ending position of a given target value.
+
+Your algorithm's runtime complexity must be in the order of O(log n).
+
+If the target is not found in the array, return [-1, -1].
+
+For example,
+Given [5, 7, 7, 8, 8, 10] and target value 8,
+return [3, 4].
+'''
+
+
+
+
+class Solution(object):
+
+    def get_second_index(self,array,target):
+        #pdb.set_trace()
+        if target in array:
+            index = 1
+            while index < len(array):
+                if not array[index] == target:
+                    break
+                index += 1
+            return index
+        else:
+            return -1
+
+
+
+    def get_end_index(self, nums, target):
+        if target in nums:
+            first_idx = nums.index(target)
+            _tmp = nums[first_idx + 1:]
+            value = self.get_second_index(_tmp,target)
+            if value == -1:
+                return [first_idx,first_idx]
+            else:
+                return [first_idx, first_idx + value]
+        else:
+            return [-1, -1]
+
+    def searchRange(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+
+        return self.get_end_index(nums, target)

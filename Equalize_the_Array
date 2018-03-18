@@ -1,0 +1,36 @@
+
+'''
+Karl has an array of  integers defined as . In one operation, he can delete any element from the array.
+
+Karl wants all the elements of the array to be equal to one another. To do this, he must delete zero or more elements from the array. Find and print the minimum number of deletion operations Karl must perform so that all the array's elements are equal.
+
+Input Format
+
+The first line contains an integer, , denoting the number of elements in array . 
+The next line contains  space-separated integers where element  corresponds to array element  (.
+Do it in O(n)
+'''
+
+from collections import defaultdict
+import sys
+def equalizeArray(arr):
+    # Complete this function
+    element_dict = defaultdict(int)
+    for e in arr:
+        if e not in element_dict.keys():
+            element_dict[e] = 1
+        else:
+            element_dict[e] +=1
+    max_element = max(element_dict , key = lambda x: element_dict[x])
+    num_of_delete = 0
+
+    for e in element_dict.keys():
+        if e != max_element:
+            num_of_delete += element_dict[e]
+    return num_of_delete
+
+if __name__ == "__main__":
+    n = int(raw_input().strip())
+    arr = map(int, raw_input().strip().split(' '))
+    result = equalizeArray(arr)
+    print result
